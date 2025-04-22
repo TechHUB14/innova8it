@@ -259,6 +259,168 @@ for (var k = 0; i < 3; i++) {
   })(i);
 }
 
+//multiple inheritence
+const fly = {
+  fly() {
+    console.log("Can fly");
+  }
+};
+
+const swim = {
+  swim() {
+    console.log("Can swim");
+  }
+};
+
+const birdFish = Object.assign({}, fly, swim);
+birdFish.fly(); // Can fly
+birdFish.swim(); // Can swim
+
+//using mix
+function mix(...sources) {
+  return Object.assign({}, ...sources);
+}
+
+const eat = {
+  eat() {
+    console.log("Eating...");
+  }
+};
+
+const sleep = {
+  sleep() {
+    console.log("Sleeping...");
+  }
+};
+
+const creature = mix(eat, sleep);
+creature.eat();
+creature.sleep();
+
+//protypical relationships
+function Animal() {}
+Animal.prototype.eat = function() {
+  console.log("Eating...");
+};
+
+const dog = new Animal();
+dog.eat();
+
+//object.create
+const animal = {
+  speak() {
+    console.log("Animal speaks");
+  }
+};
+
+const cat = Object.create(animal);
+cat.speak();
+
+//inherintg methods
+//class
+class Vehicle {
+  start() {
+    console.log("Vehicle started");
+  }
+}
+
+class Car extends Vehicle {}
+
+const myCar = new Car();
+myCar.start();
+
+//prototype chain
+function Parent() {}
+Parent.prototype.greet = function() {
+  console.log("Hello!");
+};
+
+const child = new Parent();
+child.greet();
+
+//using object.create
+const base = {
+  describe() {
+    console.log("Describing...");
+  }
+};
+
+const derived = Object.create(base);
+derived.describe();
+
+//get and set
+
+const person = {
+  firstName: "Vishnu",
+  lastName: "Yadav",
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+  set fullName(name) {
+    [this.firstName, this.lastName] = name.split(" ");
+  }
+};
+
+console.log(person.fullName);
+person.fullName = "Ram Sharma";
+console.log(person.fullName);
+
+class Rectangle {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  get area() {
+    return this.width * this.height;
+  }
+}
+
+const box = new Rectangle(10, 20);
+console.log(box.area); // 200
+
+//object inherting from object and function
+//object
+const anima = { eats: true };
+const rabbit = Object.create(anima);
+rabbit.hops = true;
+
+console.log(rabbit.eats); // true
+
+//function
+function Dog(name) {
+  this.name = name;
+}
+Dog.prototype.bark = function() {
+  console.log(this.name + " says Woof!");
+};
+
+const tommy = new Dog("Tommy");
+tommy.bark();
+
+
+//set and map
+
+const ids = new Set();
+ids.add(101);
+ids.add(102);
+ids.add(101); // Duplicate won't be added
+console.log(ids); // Set {101, 102}
+
+const numbers = [1, 2, 3, 2, 4, 1];
+const unique = [...new Set(numbers)];
+console.log(unique); // [1, 2, 3, 4]
+
+const scores = new Map();
+scores.set("Vishnu", 95);
+scores.set("Ankit", 87);
+console.log(scores.get("Vishnu")); // 95
+
+const objKey = {};
+const map = new Map();
+map.set(objKey, "value for object key");
+console.log(map.get(objKey));
+
 
 
 
